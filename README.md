@@ -13,4 +13,5 @@
 
 
 ## go redis文档参考
-- https://godoc.org/github.com/garyburd/redigo/redis
+- https://godoc.org/github.com/garyburd/redigo/redis (官方)
+- https://www.golang123.com/book/41?chapterID=931 （中文第三方）
