@@ -5,8 +5,12 @@
 - 需要安装有
 - go get -u github.com/astaxie/beego
 - go get -u github.com/beego/bee
-- go get github.com/docker/docker/client
-
+- go get -u github.com/docker/docker/client
+- go get -u github.com/garyburd/redigo/redis
 
 ## API参考
 - https://docs.docker.com/develop/sdk/#install-the-sdks
+
+
+## go redis文档参考
+- https://godoc.org/github.com/garyburd/redigo/redis
