@@ -8,12 +8,11 @@ import (
 	"encoding/json"
 	"io"
 	"os"
-)
+	)
 
 const (
 	version string = "1.37"
 )
-
 
 func ConnectClient() (interface{}, interface{}) {
 
@@ -27,7 +26,6 @@ func ConnectClient() (interface{}, interface{}) {
 
 	return ctx, cli
 }
-
 
 //docker ps
 func ListDocker() string {
@@ -47,12 +45,10 @@ func ListDocker() string {
 	if err != nil {
 		panic("")
 	}
-	jsons, err := json.Marshal(containers)
+	jsons, err := json.MarshalIndent(containers,""," ")
 
 	return string(jsons)
 }
-
-
 
 //docker images
 func ListImages() string {
@@ -120,8 +116,6 @@ func PullDocker() {
 	io.Copy(os.Stdout, out)
 }
 
-
-
 //docker start
 func StartDocker(strs ...string) {
 	ctx := context.Background()
@@ -170,4 +164,24 @@ func StopDocker(strs ...string) {
 			panic(err)
 		}
 	}
+}
+
+//docker top
+func TopDocker(dockerName string) string{
+	ctx := context.Background()
+	cli, err := client.NewClientWithOpts(client.WithVersion(version))
+	defer func() {
+		cli.Close()
+	}()
+	if err != nil {
+		panic(err)
+	}
+	pid:=[]string{""}
+	dockerPid,err:=cli.ContainerTop(ctx,dockerName,pid)
+	if err!=nil{
+		glog.Errorf("can not find dockerPid: %v",err)
+		return "error"
+	}
+	jsons, err := json.Marshal(dockerPid)
+	return string(jsons)
 }
